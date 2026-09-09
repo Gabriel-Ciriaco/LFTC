@@ -4,9 +4,10 @@ const entrada1Input = document.getElementById("entrada");
 const entrada2Input = document.getElementById("entrada2");
 
 const testarButton = document.getElementById("submitButton");
-const testarButton2 = document.getElementById("submitButton2");
 
-const saidaOutput = document.getElementById("saida");
+
+const saidaOutput1 = document.getElementById("saida1");
+const saidaOutput2 = document.getElementById("saida2");
 
 
 function getExpressaoRegular(expressaoRegular)
@@ -26,40 +27,45 @@ function avaliarExpressaoRegular(expressaoRegular, entrada)
     let regex = getExpressaoRegular(expressaoRegular)
     
     if (!regex)
-    {
-        saidaOutput.textContent = "Regex Inválido";
-        return "";
-    }
+        return "Regex Inválido";
     
     let resultado = regex.exec(entrada);
 
     return resultado !== null ?
-             "Expressão válida." : "Expressão Inválida.";
+             "Expressão válida." : "Expressão inválida.";
 }
 
-function testarTeclado(event) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
+function executarTeste(expressaoRegular, entrada, saida) {
+    saida.textContent =
+        avaliarExpressaoRegular(expressaoRegular, entrada.value);
 
-        executarTeste(regexInput.value, event.target.value);
+    let cores = {
+        "Expressão válida.": "#8ff152ff",
+        "Expressão inválida.": "#f13434ff"
+    };
+
+    if (saida.textContent in cores)
+    {
+        entrada.style.backgroundColor = cores[saida.textContent];
     }
 }
 
-function executarTeste(expressaoRegular, entrada) {
-    saidaOutput.textContent =
-        avaliarExpressaoRegular(expressaoRegular, entrada);
+function refreshInputs(entrada, saida)
+{
+    entrada.style.backgroundColor = "";
+    entrada.value = "";
+
+    saida.textContent = "";
 }
 
-function gerenciarClique(event) {
-    const idDoInput = event.target.getAttribute("data-entrada"); 
-
-    const inputCorrespondente = document.getElementById(idDoInput); 
-    
-    executarTeste(regexInput.value, inputCorrespondente.value);
+function gerenciarClique(event) { 
+    executarTeste(regexInput.value, entrada1Input, saidaOutput1);
+    executarTeste(regexInput.value, entrada2Input, saidaOutput2);
 }
-
-entrada1Input.addEventListener('keydown', testarTeclado);
-entrada2Input.addEventListener('keydown', testarTeclado);
 
 testarButton.addEventListener('click', gerenciarClique);
-testarButton2.addEventListener('click', gerenciarClique);
+
+regexInput.addEventListener('keyup', () => {
+    refreshInputs(entrada1Input, saidaOutput1);
+    refreshInputs(entrada2Input, saidaOutput2);
+})

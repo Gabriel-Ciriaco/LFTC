@@ -85,17 +85,42 @@ body::before,
 
 #entrada {
     grid-column: 1;
-    min-width: 0; 
+    grid-row: 3;
+    min-width: 0;
+}
+
+#saida1 {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: center;
+}
+
+#entrada2 {
+    grid-column: 1;
+    grid-row: 4;
+    min-width: 0;
+}
+
+#saida2 {
+    grid-column: 2;
+    grid-row: 4;
+    align-self: center;
 }
 
 #submitButton {
-    grid-column: 2;
-    grid-row: 3;
+    grid-column: 1 / -1;
+    grid-row: 5;
 }
 
+#saida1, #saida2 {
+    font-size: 0.88rem;
+    color: #475569;
+    font-weight: 500;
+    white-space: nowrap;
+}
 
-#saida {
-    grid-column: 1 / -1;
+#saida1:empty, #saida2:empty {
+    display: none;
 }
 
 button {
