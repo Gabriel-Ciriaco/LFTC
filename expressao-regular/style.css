@@ -77,39 +77,55 @@ body {
 }
 
 
-body::before,
-#regexInput {
+#voltar {
     grid-column: 1 / -1;
+    grid-row: 1;
+    font-size: 0.85rem;
+    color: #475569;
+    text-decoration: none;
 }
 
+#voltar:hover {
+    color: #0f172a;
+}
+
+body::before {
+    grid-column: 1 / -1;
+    grid-row: 2;
+}
+
+#regexInput {
+    grid-column: 1 / -1;
+    grid-row: 3;
+}
 
 #entrada {
     grid-column: 1;
-    grid-row: 3;
+    grid-row: 4;
     min-width: 0;
 }
 
 #saida1 {
     grid-column: 2;
-    grid-row: 3;
+    grid-row: 4;
     align-self: center;
 }
 
 #entrada2 {
     grid-column: 1;
-    grid-row: 4;
+    grid-row: 5;
     min-width: 0;
 }
 
 #saida2 {
     grid-column: 2;
-    grid-row: 4;
+    grid-row: 5;
     align-self: center;
 }
 
 #submitButton {
     grid-column: 1 / -1;
-    grid-row: 5;
+    grid-row: 6;
 }
 
 #saida1, #saida2 {
