@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Gramática Regular</title>
+    <meta name="description" content="Simulador de Gramática Linear à Direita (GLD).">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <a id="voltar" href="../index.html">← Voltar</a>
+
+    <p class="instrucoes">
+        Maiúsculas (A-Z) são símbolos não-terminais e o resto são terminais.
+        Campo vazio = ε. Digite <code>|</code> para adicionar uma nova alternativa e
+        <code>Enter</code> para uma nova produção. A Gramática é linear à direita, logo devem ser da forma
+        <code>A → wB</code> ou <code>A → w</code>.
+    </p>
+
+    <div id="gramatica"></div>
+
+    <div id="acoes">
+        <button id="novaProducao" type="button">+ Produção</button>
+        <button id="exemplo" type="button">Exemplo</button>
+        <button id="limpar" type="button">Limpar</button>
+    </div>
+
+    <div id="saidaGramatica"></div>
+
+    <textarea id="entradas" rows="5" wrap="off"
+        placeholder="Palavras de teste, uma por linha (linha vazia = ε)"></textarea>
+
+    <button id="submitButton" type="button">Testar</button>
+
+    <div id="resultados"></div>
+
+    <script src="./gld_validator.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

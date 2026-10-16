@@ -1,0 +1,241 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    padding: 24px;
+}
+
+body {
+    width: 100%;
+    max-width: 640px;
+    border-radius: 12px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+body::before {
+    content: "Simulador de Gramática Regular";
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0f172a;
+    letter-spacing: -0.3px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 4px;
+    order: -2;
+}
+
+#voltar {
+    order: -3;
+    font-size: 0.85rem;
+    color: #475569;
+    text-decoration: none;
+}
+
+#voltar:hover {
+    color: #0f172a;
+}
+
+.instrucoes {
+    font-size: 0.85rem;
+    color: #475569;
+    line-height: 1.55;
+}
+
+code,
+.mono,
+input[type="text"],
+textarea {
+    font-family: ui-monospace, "Cascadia Code", "Consolas", "Liberation Mono",
+        monospace;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: #ffffff;
+    border: 3px solid #cbd5e1;
+    border-radius: 8px;
+    color: #0f172a;
+    font-size: 0.88rem;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #2563eb;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+/* Produções */
+#gramatica {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.producao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.producao .nt {
+    width: 48px;
+    flex: none;
+    text-align: center;
+}
+
+.producao .nt[readonly] {
+    background-color: #f1f5f9;
+}
+
+.regras {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    flex: 1;
+    min-width: 0;
+}
+
+.regras .regra {
+    width: 96px;
+    flex: 1 1 80px;
+}
+
+.seta,
+.ou {
+    color: #475569;
+    font-weight: 500;
+}
+
+.invalida {
+    border-color: #f13434ff !important;
+}
+
+.remover {
+    padding: 6px 10px;
+    flex: none;
+}
+
+#acoes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 22px;
+    background-color: #030509;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+button:hover {
+    background-color: #1e293b;
+}
+
+button:active {
+    background-color: #0f172a;
+}
+
+/* Saídas */
+#saidaGramatica,
+#resultados {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#saidaGramatica:empty,
+#resultados:empty {
+    display: none;
+}
+
+.erro {
+    color: #b91c1c;
+}
+
+.resultado summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.resultado summary::-webkit-details-marker {
+    display: none;
+}
+
+.resultado .palavra {
+    color: #0f172a;
+}
+
+.badge {
+    padding: 2px 10px;
+    border-radius: 6px;
+    color: #0f172a;
+    font-size: 0.8rem;
+}
+
+.badge.aceita {
+    background-color: #8ff152ff;
+}
+
+.badge.rejeitada {
+    background-color: #f13434ff;
+}
+
+.derivacao {
+    margin: 6px 0 4px;
+    padding: 8px 12px;
+    border-left: 2px solid #cbd5e1;
+    color: #0f172a;
+    white-space: pre-wrap;
+}
+
+.derivacao .regra-usada {
+    color: #94a3b8;
+}
