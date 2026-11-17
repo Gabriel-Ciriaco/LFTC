@@ -1,0 +1,445 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f5f5f6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+    color: #0f172a;
+    padding: 24px;
+}
+
+body {
+    width: 100%;
+    max-width: 760px;
+    border-radius: 12px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+body::before {
+    content: "Simulador de Autômato Finito";
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #0f172a;
+    letter-spacing: -0.3px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 4px;
+    order: -2;
+}
+
+#voltar {
+    order: -3;
+    font-size: 0.85rem;
+    color: #475569;
+    text-decoration: none;
+}
+
+#voltar:hover {
+    color: #0f172a;
+}
+
+.instrucoes {
+    font-size: 0.85rem;
+    color: #475569;
+    line-height: 1.55;
+}
+
+code,
+.mono,
+input[type="text"],
+textarea {
+    font-family: ui-monospace, "Cascadia Code", "Consolas", "Liberation Mono",
+        monospace;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background-color: #ffffff;
+    border: 3px solid #cbd5e1;
+    border-radius: 8px;
+    color: #0f172a;
+    font-size: 0.88rem;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #2563eb;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+button {
+    padding: 10px 18px;
+    background-color: #030509;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+button:hover {
+    background-color: #1e293b;
+}
+
+button:active {
+    background-color: #0f172a;
+}
+
+button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+button.secundario {
+    background-color: #ffffff;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+}
+
+button.secundario:hover {
+    background-color: #f8fafc;
+    border-color: #94a3b8;
+}
+
+button.perigo {
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+button.perigo:hover {
+    background-color: #fef2f2;
+    border-color: #f13434ff;
+}
+
+.oculto {
+    display: none !important;
+}
+
+#barraSuperior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#seletorTipo {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background-color: #e2e8f0;
+    border-radius: 8px;
+}
+
+#seletorTipo button {
+    padding: 7px 14px;
+    background-color: transparent;
+    color: #475569;
+    border-radius: 6px;
+}
+
+#seletorTipo button.ativo {
+    background-color: #ffffff;
+    color: #0f172a;
+}
+
+#acoesExemplo {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#barraFerramentas {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#barraFerramentas .ferramenta {
+    padding: 8px 14px;
+    background-color: #ffffff;
+    color: #0f172a;
+    border: 1px solid #cbd5e1;
+    font-size: 0.85rem;
+}
+
+#barraFerramentas .ferramenta:hover {
+    border-color: #94a3b8;
+    background-color: #f8fafc;
+}
+
+#barraFerramentas .ferramenta.ativo {
+    background-color: #030509;
+    color: #ffffff;
+    border-color: #030509;
+}
+
+#containerDiagrama {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    background-color: #ffffff;
+    border: 3px solid #cbd5e1;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#diagramaCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+#promptTransicao {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    z-index: 10;
+}
+
+#promptTransicaoTexto {
+    font-size: 0.84rem;
+    color: #334155;
+    font-weight: 500;
+}
+
+#promptTransicao input {
+    flex: 1;
+    min-width: 160px;
+    padding: 7px 10px;
+}
+
+#menuContexto {
+    position: absolute;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 20;
+    min-width: 168px;
+}
+
+#menuContexto button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+    background-color: transparent;
+    color: #0f172a;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    border: none;
+}
+
+#menuContexto button:hover {
+    background-color: #f1f5f9;
+}
+
+#menuContexto button.perigo {
+    color: #b91c1c;
+}
+
+#menuContexto button.perigo:hover {
+    background-color: #fef2f2;
+}
+
+#editorSelecao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 10px 12px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+#editorTitulo {
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+#editorValorInput {
+    flex: 1;
+    min-width: 140px;
+    padding: 7px 10px;
+}
+
+#saidaAutomato,
+#resultados {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#saidaAutomato:empty,
+#resultados:empty {
+    display: none;
+}
+
+.erro {
+    color: #b91c1c;
+}
+
+#simulacaoUnica {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#controlesEntradaUnica {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#controlesEntradaUnica input {
+    flex: 1;
+}
+
+#painelPassoAPasso {
+    padding: 12px 14px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#controlesPasso {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#infoPasso {
+    margin-left: auto;
+    font-size: 0.84rem;
+    color: #475569;
+}
+
+#fitaSimulacao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+}
+
+.celula-fita {
+    min-width: 30px;
+    height: 32px;
+    padding: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: #0f172a;
+}
+
+.celula-fita.lida {
+    background-color: #f1f5f9;
+    color: #64748b;
+}
+
+.celula-fita.atual {
+    border: 2px solid #2563eb;
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    font-weight: 600;
+}
+
+#statusPasso {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: #334155;
+}
+
+.resultado-linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.resultado-linha:hover {
+    background-color: #e2e8f0;
+}
+
+.resultado-linha .palavra {
+    color: #0f172a;
+}
+
+.badge {
+    padding: 2px 10px;
+    border-radius: 6px;
+    color: #0f172a;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.badge.aceita {
+    background-color: #8ff152ff;
+}
+
+.badge.rejeitada {
+    background-color: #f13434ff;
+}
