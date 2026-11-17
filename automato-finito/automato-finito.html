@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Autômato Finito</title>
+    <meta name="description" content="Simulador de Autômato Finito Determinístico (AFD) e Não-Determinístico (AFND).">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <a id="voltar" href="../index.html">← Voltar</a>
+
+    <p class="instrucoes">
+        Escolha o modo na barra abaixo do tipo do autômato. Use o botão direito sobre um estado ou
+        selecione um elemento para editar rótulo, definir estado inicial/final ou editar símbolos
+        (separe por vírgula ou <code>|</code>, vazio = <code>ε</code>).
+    </p>
+
+    <div id="barraSuperior">
+        <div id="seletorTipo">
+            <button type="button" id="tipoAfdButton" class="ativo" data-tipo="AFD">AFD</button>
+            <button type="button" id="tipoAfndButton" data-tipo="AFND">AFND</button>
+        </div>
+
+        <div id="acoesExemplo">
+            <button type="button" id="exemploAfdButton" class="secundario">Exemplo AFD</button>
+            <button type="button" id="exemploAfndButton" class="secundario">Exemplo AFND</button>
+            <button type="button" id="limparButton" class="secundario">Limpar</button>
+        </div>
+    </div>
+
+    <div id="barraFerramentas">
+        <button type="button" class="ferramenta ativo" data-modo="mover">Selecionar / Mover</button>
+        <button type="button" class="ferramenta" data-modo="estado">+ Estado</button>
+        <button type="button" class="ferramenta" data-modo="transicao">+ Transição</button>
+        <button type="button" class="ferramenta" data-modo="remover">Remover</button>
+    </div>
+
+    <div id="containerDiagrama">
+        <div id="diagramaCanvas"></div>
+
+        <div id="promptTransicao" class="oculto">
+            <span id="promptTransicaoTexto">Símbolos da transição (vazio = ε):</span>
+            <input type="text" id="inputSimbolosTransicao" placeholder="Ex: a, b ou vazio para ε">
+            <button type="button" id="confirmarTransicaoButton">Salvar</button>
+            <button type="button" id="cancelarTransicaoButton" class="secundario">Cancelar</button>
+        </div>
+
+        <div id="menuContexto" class="oculto">
+            <button type="button" id="menuInicialButton">Definir como Inicial</button>
+            <button type="button" id="menuFinalButton">Alternar Final</button>
+            <button type="button" id="menuEditarButton">Editar</button>
+            <button type="button" id="menuRemoverButton" class="perigo">Remover</button>
+        </div>
+    </div>
+
+    <div id="editorSelecao" class="oculto">
+        <span id="editorTitulo" class="mono"></span>
+        <input type="text" id="editorValorInput" placeholder="Rótulo ou símbolos (vazio = ε)">
+        <button type="button" id="editorSalvarButton">Aplicar</button>
+        <button type="button" id="editorInicialButton" class="secundario">Inicial</button>
+        <button type="button" id="editorFinalButton" class="secundario">Final</button>
+        <button type="button" id="editorRemoverButton" class="secundario perigo">Remover</button>
+    </div>
+
+    <div id="saidaAutomato"></div>
+
+    <div id="simulacaoUnica">
+        <div id="controlesEntradaUnica">
+            <input type="text" id="entradaUnica" placeholder="Palavra para passo a passo (vazio = ε)">
+            <button type="button" id="iniciarSimulacaoButton">Simular</button>
+        </div>
+
+        <div id="painelPassoAPasso" class="oculto">
+            <div id="controlesPasso">
+                <button type="button" id="passoAnteriorButton" class="secundario">← Anterior</button>
+                <button type="button" id="proximoPassoButton">Próximo →</button>
+                <button type="button" id="autoPlayButton" class="secundario">Auto</button>
+                <button type="button" id="resetarSimulacaoButton" class="secundario">Resetar</button>
+                <span id="infoPasso" class="mono"></span>
+            </div>
+            <div id="fitaSimulacao" class="mono"></div>
+            <div id="statusPasso" class="mono"></div>
+        </div>
+    </div>
+
+    <textarea id="entradas" rows="5" wrap="off"
+        placeholder="Palavras de teste, uma por linha (linha vazia = ε)"></textarea>
+
+    <button id="submitButton" type="button">Testar Múltiplas</button>
+
+    <div id="resultados"></div>
+
+    <script src="https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"></script>
+    <script src="./estado.js"></script>
+    <script src="./transicao.js"></script>
+    <script src="./automato_finito.js"></script>
+    <script src="./afd.js"></script>
+    <script src="./afnd.js"></script>
+    <script src="./diagrama.js"></script>
+    <script src="./simulacao.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>
